@@ -12,9 +12,24 @@ provider "aws" {
   region = "eu-west-2"
 }
 
+data "aws_ami" "myami" {
+  most_recent = true
+
+  filter {
+    name   = "name"
+    values = ["amzn2-ami-kernel-*-x86_64-gp2"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+  owners = ["amazon"]
+}
+
 resource "aws_instance" "web_server" {
   #   count         = 2
-  ami           = "ami-0cdb51c8064e24bbc"
+  ami           = data.aws_ami.myami.id
   instance_type = var.instance_type
 
   tags = {
