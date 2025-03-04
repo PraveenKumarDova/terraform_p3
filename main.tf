@@ -6,12 +6,12 @@ terraform {
     }
   }
 
-  # backend "s3" {
-  #   bucket = "tf-state-bkt1"
-  #   key = "terraform.tfstate" #terraform actual state file
-  #   region = "eu-west-2"
-  #   dynamodb_table = "aws-table" #to store lockid's
-  # }
+  backend "s3" {
+    bucket = "tf-state-bkt1"
+    key = "terraform.tfstate" #terraform actual state file
+    region = "eu-west-2"
+    dynamodb_table = "aws-table" #to store lockid's
+  }
 }
 
 # Configure the AWS Provider
